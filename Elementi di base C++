@@ -1,0 +1,231 @@
+# Elementi di base C++
+
+## Input/output su file
+
+I programmi richiesti devono leggere il proprio input da un file chiamato input.txt e stampare il proprio output su un file chiamato output.txt1. 
+
+L’I/O su file prevede tre passi: 
+
+* apertura del file
+* operazioni sul file
+* chiusura del file
+
+I comandi da utilizzare sono:
+
+ifstream in ("input.txt"); per aprire "input.txt" e leggere con il comando *in* (che funziona allo stesso modo del cin).
+ofstream out ("output.txt"); per creare o aprire (se già esistente) il file "output.txt" su cui possiamo scrivere con il comando *out* (analogo al cout).
+
+**NB** Il file input.txt deve essere salvato nella stessa cartella in cui è salvato il programma principale. In questo file vanno scritti i dati da leggere.
+
+**NB** Il file output.txt, se non già esistente, viene creato automaticamente.
+
+
+```cpp
+#include<fstream>
+using namespace std;
+
+int main(){
+	ifstream in ("input.txt");
+	ofstream out ("output.txt");
+
+	int a;
+	in >> a; //inserisco quello che leggo nella variabile a
+
+	out << "Ciao! La variabile a vale " << a;
+	
+	in.close();
+	out.close();
+    
+	return 0;
+}
+```
+
+## Input e output da tastiera
+
+**Esempio:**
+```cpp
+#include<iostream>
+using namespace std;
+
+int main() {
+    int a, b;
+    cout << "Inserire a: ";
+    cin >> a;
+    cout << "\nInserire b: ";
+    cin >> b;
+    
+    return 0;
+}
+```
+L'istruzione *cin >> a* legge il numero inserito da tastiera e lo salva nella variabile a.
+
+## Stampa a video
+
+Per stampare un messaggio a video si usa l'istruzione cout, *cout << "Messaggio"*; oppure *cout << nomediunavariabile;*
+
+**NB:** Tutto il codice va scritto dentro al main e prima del return .
+
+```cpp
+#include<iostream>
+using namespace std;
+
+int main() {
+    cout << "Ciao mondo!";
+    return 0;
+}
+```
+
+## Le variabili
+
+Ci sono quattro tipi principali di variabili: int (numeri interi), double e float (numeri decimali), char (caratteri). I caratteri vengono sempre rappresentati tra apici, come nell'esempio: 'a'.
+
+**Esempio:**
+```cpp
+#include<iostream>
+using namespace std;
+
+int main() {
+    int a = 5;
+    double b = 3.5;
+    float c = 7.2;
+    char d = 'a';
+    
+    cout << a << " " << b << " " << c << " " << d;
+
+    return 0;
+}
+```
+
+## Operazioni con le variabili
+
+Quando di fanno operazioni tra variabili bisogna prestare attenzione ai vari tipi
+**Esempio:**
+```cpp
+#include<iostream>
+using namespace std;
+
+int main() {
+    int a = 3, b = 2;
+    int somma = a+b;
+    int differenza = a-b;
+    int prodotto = a*b;
+    int rapporto = a/b;
+    int resto = a%b;
+
+    cout << somma << " " << differenza << " " << prodotto << " " << rapporto << " " << resto;
+    
+    return 0;
+}
+```
+
+## Le istruzioni if e else
+
+Lo scopo dell'istruzione if/else è il controllo di una *condizione*. Se essa è verificata, viene eseguita l'istruzione *istruzioni 1*, altrimenti l'istruzione *istruzioni 2*: 
+
+```cpp
+if(condizione){
+    istruzioni1;
+}else{
+    istruzioni2;
+}
+```
+
+**Esempio:**
+```cpp
+#include<iostream>
+using namespace std;
+
+int main() {
+    int a = 3, b = 2;
+    if(a>b){
+        cout << "a e' maggiore di b";
+    }else{
+        cout << "a e' minore (o uguale) di b";
+    }
+    
+    return 0;
+}
+```
+
+## Lo switch
+
+Istruzioni diverse a seconda del valore di una precisa espressione possono essere rappresentate dallo statement switch. 
+Lo switch non è altro che una semplificazione di svariati if annidati con diverse condizioni.
+
+Come funziona: 
+Viene valutatp il valore dell'espressione passata come parametro e se il valore corrisponde ad uno di quelli specificati nei *case* viene eseguito il blocco di istruzioni corrispondente. 
+Se il blocco individuato termina con un'istruzione break allora il programma esce dallo switch, altrimenti, vengono eseguiti anche i blocchi successivi finchè non viene trovato un *break* o non si raggiunge l'ultimo blocco dello switch. 
+Se nessun blocco corrisponde al parametro passato, viene eseguito il blocco default, se specificato. 
+
+
+```cpp
+switch(espressione intera) { 
+case (valore costante 1): 
+    istruzioni1;
+    break; 
+case (valore costante 2):
+    istruzioni2;
+    break;  
+...
+default:    // è opzionale 
+    istruzioni default;
+ } 
+```
+
+## Il ciclo while
+
+Il while serve per eseguire ripetutamente un insieme di istruzioni, finchè una certa condizione è verificata. 
+La condizione rappresenta un controllo booleano (vero/falso) che viene effettuato ad ogni iterazione. 
+
+```cpp
+while(condizione) { 
+    istruzioni;
+} 
+```
+
+**Esempio:**
+
+```cpp
+#include<iostream>
+using namespace std;
+
+int main(){
+	int a = 10;
+	while(a>0){
+		cout << " a = " << a << endl;
+		a--;
+	}
+    
+	return 0;
+}
+
+```
+
+## Il ciclo for
+
+I cicli for seguono un meccanismo simile al while. La differenza sta nel conoscere il numero di iterazioni necessarie da fare. Nel caso io lo conosca, utilizzo il ciclo for.
+
+Il for fa uso di una variabile, in questo caso la variabile i, come contatore del numero di iterazioni. Come prima cosa, a questa variabile viene dato un valore iniziale. Finchè il valore di i rispetta la condizione, vengono eseguite le istruzioni contenute tra la parentesi graffe. Eseguito il blocco di istruzioni, la variabile i, viene incrementata secondo l'incremento e, se la condizione è soddisfatta, il ciclo viene ripetuto. 
+
+```cpp
+int i;
+for(i = valore iniziale; condizione; incremento della variabile i) { 
+  istruzioni; 
+} 
+```
+
+**Esempio:**
+
+```cpp
+#include<iostream>
+using namespace std;
+
+int main(){
+	int i;
+	for(i = 0; i<10; i++){
+		cout << " i = " << i << endl;
+	}
+    
+	return 0;
+}
+```
